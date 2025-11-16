@@ -1,11 +1,10 @@
-﻿// Author:  Brendan Obilo & Kyle Chapman
-// Created at:    October 18, 2024
-// Modified at:  October 16, 2025
+// Author:  Rebecca
+// Created at:    October 1, 2025
+// Modified at:  November 16, 2025
 // Description:
-// A class that deals with the input from user. The input includes, Car’s make (or manufacturer),
-// model, year, colour, price, and whether it is new or not (as a Boolean).
-// It Uses this parameters and adds to the car list that displays on the textBlock.
-// Created by inheriting a vehicle class.
+// Defines the Car class, which inherits from Vehicle.
+// Cars share all base Vehicle behaviour and identify themselves as Type "Car".
+//Sources: Kyle Chapman CarList2025 was used as my insperation on the basics of this code.
 
 using System;
 using System.Collections.Generic;
@@ -13,40 +12,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarList2025
+namespace CarViewer
 {
     internal class Car : Vehicle
     {
         /// <summary>
-        /// A default constructor
+        /// The type label for this vehicle subclass.
         /// </summary>
-        public Car() : base() { }
+        public override string Type => "Car";
 
         /// <summary>
-        /// A parameterized constructor that accepts various paramterized
-        /// And sets them to the private variables
+        /// Default constructor. Uses the Vehicle base constructor to assign ID.
         /// </summary>
-        /// <param name="carMake"> The make of the car entered by user</param>
-        /// <param name="carModel"> The model of the car entered by user</param>
-        /// <param name="carYear"> The Year the car was made as entered by user</param>
-        /// <param name="carPrice"> The price of the car as entered by the user</param>
-        /// <param name="isCarNew"> A parameter than determines if the car is new or not</param>
-        public Car(string carMake, string carModel, int carYear, decimal carPrice, bool isCarNew) : base()
+        public Car() : base()
         {
-            make = carMake;
-            model = carModel;
-            year = carYear;
-            price = carPrice;
-            isNew = isCarNew;
         }
 
         /// <summary>
-        /// Returns a string version of the Car.
+        /// Parameterized constructor — uses properties so validation in Vehicle runs.
         /// </summary>
-        /// <returns>A string version of the Car.</returns>
-        public override string ToString()
+        public Car(string carMake, string carModel, int carYear, decimal carPrice, bool isCarNew)
+            : base()
         {
-            return Year + " " + Make + " " + Model + " (Car)";
+            Make = carMake;
+            // Will throw ArgumentNullException if blank.
+            Model = carModel;
+            Year = carYear;
+            // Will throw ArgumentOutOfRangeException if < 0.
+            Price = carPrice;
+            IsNew = isCarNew;
         }
 
     }
